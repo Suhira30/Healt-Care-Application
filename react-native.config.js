@@ -1,2 +1,2 @@
-export const assets = ['./assets/Fonts'];
+export const assets = ['./assets/fonts'];
   

@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     // color: "white",
-    fontFamily:"SourceSansPro-Semibold",
+    fontFamily:"SourceSansPro-Italic",
     fontWeight: "bold",
   },
   text2: {

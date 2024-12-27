@@ -9,11 +9,14 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.24.0",
     "expo": "~52.0.20",
-    "expo-font": "^13.0.2",
+    "expo-font": "~13.0.2",
     "expo-status-bar": "~2.0.0",
+    "firebase": "^11.1.0",
     "react": "18.3.1",
-    "react-native": "0.76.5"
+    "react-native": "0.76.5",
+    "react-native-font": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
