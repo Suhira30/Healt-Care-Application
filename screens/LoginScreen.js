@@ -1,43 +1,60 @@
 import React from "react";
+import {useState} from "react";
 import { Text, TextInput, View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {signInWithEmailAndPassword} from 'firebase/auth'
+import auth from "../Services/FirebaseAuth";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function RegisterScreen() {
+export default function LoginScreen() {
+
+    const [email,setEmail]=useState('')
+    const [password,setPassword]=useState('')
+    const[error,setError]=useState('')
+
+    const handleLogin=async ()=>{
+        setError(''); 
+       
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            // console.log("User created:", userCredential.user);
+          } catch (error) {
+           setError("Failed to create an account. " + err.message);
+            // console.error("Error during registration:", error.message);
+          }
+    }
   return (
     <View style={styles.container}>
-      {/* Background Image (commented out) */}
-      {/* <ImageBackground
-        source={require("../assets/Image/frontBackground.jpg")} // Replace with your image path
-        style={styles.background}
-        resizeMode="cover"
-      > */}
+    
       <Image 
         source={require('../assets/Image/logo2.png')} 
         style={styles.logo} 
       />
-      <Text style={styles.headerText}>Sign in to your Account</Text>
+      <Text style={styles.headerText}>Log in to your account</Text>
 
       <Text style={styles.text}>Email Address</Text>
       <TextInput 
+        onChangeText={setEmail}
         placeholder="Enter your Email Address"
         style={styles.input}
       />   
 
       <Text style={styles.text}>Password</Text>
       <TextInput
+        onChangeText={setPassword}
         placeholder="Enter your Password"
         secureTextEntry
         style={styles.input}
       />  
-
-      {/* Custom Styled Button */}
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Sign In</Text>
+    {/* {passwordError && <Text style={{color:"red"}}>{passwordError}</Text>} */}
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Log In</Text>
+        {error && <Text style={{color:"red"}}>{error}</Text>}
       </TouchableOpacity>
 
       <Text style={styles.footerText}>
-        Already have an account? Login here
+       Create new account? register here
       </Text>
-      {/* </ImageBackground> */}
+   
     </View>
   );
 }
@@ -55,7 +72,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   logo: {
-    marginTop: 120,
+    marginTop: 70,
     alignSelf: "center",
     height: 100,
     width: 130,
