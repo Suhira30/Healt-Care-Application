@@ -1,3 +1,5 @@
+import {View,Text,Button} from 'react-native'
+import BottomNavigation from '../components/BottomNavigation'
 export default function DashboardScreen(){
 
     return<View>
