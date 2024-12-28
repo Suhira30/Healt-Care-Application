@@ -3,15 +3,20 @@ import {useState} from "react";
 import { Text, TextInput, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 import auth from "../Services/FirebaseAuth";
+import DashboardScreen from "./DashboardScreen";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function RegisterScreen() {
+export default function RegisterScreen({navigation}) {
 
+  const goToLogin=()=>{
+    navigation.navigate('Login')
+  }
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
     const [confirmpassword,setConfirmPassword]=useState('')
     const[error,setError]=useState('')
     const[passwordError,setPasswordError]=useState('')
+
     const handleRegister=async ()=>{
         setError(""); 
         setPasswordError("");     
@@ -27,9 +32,10 @@ export default function RegisterScreen() {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             // console.log("User created:", userCredential.user);
+            navigation.navigate('Dashboard');
           } catch (error) {
-           setError("Failed to create an account. " + err.message);
-            // console.error("Error during registration:", error.message);
+           setError("Failed to create an account. " + error.message);
+            console.error("Error during registration:", error.message);
           }
     }
   return (
@@ -72,9 +78,12 @@ export default function RegisterScreen() {
       </TouchableOpacity>
 
       <Text style={styles.footerText}>
-        Already have an account? Login here
+      Already have an account?{' '}
+      <Text style={{ color: '#4054F3', fontWeight: 'bold' }}
+          onPress={goToLogin}>
+        LogIn here
       </Text>
-   
+      </Text>
     </View>
   );
 }
@@ -92,7 +101,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   logo: {
-    marginTop: 70,
+   
     alignSelf: "center",
     height: 100,
     width: 130,
@@ -132,7 +141,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   footerText: {
-    marginTop: 22,
+    marginTop: 20,
     textAlign: "center",
   },
 });

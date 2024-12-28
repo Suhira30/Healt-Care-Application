@@ -4,15 +4,23 @@ import RegisterScreen from './screens/RegisterScreen';
 import LandingPage from './screens/LandingPage';
 import LoginScreen from './screens/LoginScreen';
 import DashboardScreen from './screens/DashboardScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+Stack=createNativeStackNavigator();
+//Stack is a memory 
 
 export default function App() {
   return (
-    <View style={styles.container}>
-    {/* <LandingPage/> */}
-      {/* <RegisterScreen/> */}
-      {/* <LoginScreen/> */}
-      <DashboardScreen/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Landing'>
+      <Stack.Screen name="Landing" component={LandingPage} />
+      <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Dashboard" component={DashboardScreen} />
+
+      </Stack.Navigator>
+  </NavigationContainer>
   );
 }
 

@@ -1,6 +1,10 @@
 import { Text, View, ImageBackground, StyleSheet,Dimensions,TouchableOpacity } from "react-native";
 const { width, height } = Dimensions.get('window');
-export default function LandingPage() {
+
+export default function LandingPage({navigation}) {
+  const goToLogin = () => {
+    navigation.navigate('Login');
+  };
   return (
     <View style={styles.container}>
     
@@ -17,7 +21,7 @@ export default function LandingPage() {
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.btn} >
+        <TouchableOpacity style={styles.btn} onPress={goToLogin}>
         <Text style={styles.btnText}>Get Started</Text>
       </TouchableOpacity>
     </View>
