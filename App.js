@@ -6,6 +6,7 @@ import LoginScreen from './screens/LoginScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import DetailScreen from './screens/DetailScreen';
 
 Stack=createNativeStackNavigator();
 //Stack is a memory 
@@ -18,7 +19,7 @@ export default function App() {
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Dashboard" component={DashboardScreen} />
-
+      <Stack.Screen name="Detail" component={DetailScreen} />
       </Stack.Navigator>
   </NavigationContainer>
   );

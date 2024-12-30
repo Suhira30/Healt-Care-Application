@@ -32,7 +32,7 @@ export default function RegisterScreen({navigation}) {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             // console.log("User created:", userCredential.user);
-            navigation.navigate('Dashboard');
+            navigation.navigate('Login');
           } catch (error) {
            setError("Failed to create an account. " + error.message);
             console.error("Error during registration:", error.message);

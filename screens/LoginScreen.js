@@ -3,6 +3,7 @@ import {useState} from "react";
 import { Text, TextInput, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import auth from "../Services/FirebaseAuth";
+import { initializeGoogleFit } from '../Services/GoogleFit';
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen({navigation}) {
@@ -16,6 +17,7 @@ export default function LoginScreen({navigation}) {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             // console.log("User created:", userCredential.user);
+         
             navigation.navigate('Dashboard');
 
           } catch (error) {
