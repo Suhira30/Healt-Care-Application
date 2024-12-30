@@ -18,7 +18,9 @@ export default function App() {
       <Stack.Screen name="Landing" component={LandingPage} />
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Dashboard" component={DashboardScreen} />
+      <Stack.Screen name="Dashboard" component={DashboardScreen} options={{
+    headerShown: false  // This will hide the header
+  }}/>
       <Stack.Screen name="Detail" component={DetailScreen} />
       </Stack.Navigator>
   </NavigationContainer>

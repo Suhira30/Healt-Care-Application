@@ -14,6 +14,18 @@ export default function LoginScreen({navigation}) {
 
     const handleLogin=async ()=>{
         setError(''); 
+        if (!email && !password) {
+          setError('Please enter both email and password.');
+          return;
+      }
+      if (!email) {
+        setError('Email is not an optional');
+        return;
+    }
+    if (!password) {
+      setError('Password is not an optional');
+      return;
+  }
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             // console.log("User created:", userCredential.user);
@@ -21,8 +33,9 @@ export default function LoginScreen({navigation}) {
             navigation.navigate('Dashboard');
 
           } catch (error) {
-            if (error.code === "auth/wrong-password") {
-              setError("Incorrect password. Please try again.");
+            // console.log(error);
+            if (error.code==="auth/invalid-credential") {
+              setError("Please check your password and Email");
             } else if (error.code === "auth/user-not-found") {
               setError("No user found with this email.");
             } else {
@@ -49,6 +62,7 @@ export default function LoginScreen({navigation}) {
         placeholder="Enter your Email Address"
         style={styles.input}
       />   
+    {error ==="Email is not an optional" && <Text style={{color:"red"}}>{error}</Text>}
 
       <Text style={styles.text}>Password</Text>
       <TextInput
@@ -57,10 +71,11 @@ export default function LoginScreen({navigation}) {
         secureTextEntry
         style={styles.input}
       />  
+      {error && <Text style={{color:"red"}}>{error}</Text>}
     {/* {passwordError && <Text style={{color:"red"}}>{passwordError}</Text>} */}
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Log In</Text>
-        {error && <Text style={{color:"red"}}>{error}</Text>}
+        
       </TouchableOpacity>
 
       <Text style={styles.footerText}>
@@ -95,7 +110,7 @@ const styles = StyleSheet.create({
     width: 130,
   },
   headerText: {
-    marginBottom: 22,
+    marginBottom: 10,
     marginTop: 22,
     alignSelf: "center",
     fontSize: 20,
@@ -103,14 +118,14 @@ const styles = StyleSheet.create({
     color:"#4456e3",
   },
   text:{
-    fontWeight:500
+    fontWeight:500,
+    marginTop:15
   },
   input: {
     borderColor: "#C4C4C4",
     borderWidth: 1,
     borderRadius: 8, 
-    marginTop: 10,
-    marginBottom: 22,
+    marginTop: 8,
     padding: 10,
     width: 290,
     height:50
@@ -121,7 +136,8 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 8,
     alignItems: "center",
-    height:50
+    height:50,marginTop:22,
+    width: 290,
   },
   buttonText: {
     color: "#fff",

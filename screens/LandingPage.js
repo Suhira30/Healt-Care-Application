@@ -15,10 +15,10 @@ export default function LandingPage({navigation}) {
       />
         <View style={styles.content}>
           {/* You can add any content on top of the background image here */}
-          <Text style={styles.text}>Take care of your Health !</Text>
+          <Text style={styles.text}>Welcome to the COVID-19 Tracker</Text>
           <Text style={styles.text2}>Your health journey starts here.
-          stay healthy, informed, and empowered.Let’s take care of your health, together
-          </Text>
+          Stay informed, stay safe. Explore real-time updates 
+          on COVID-19 cases across the globe.         </Text>
         </View>
 
         <TouchableOpacity style={styles.btn} onPress={goToLogin}>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    marginTop:"45%",
+    marginTop:"35%",
     
   },
   content: {
@@ -51,18 +51,19 @@ const styles = StyleSheet.create({
     
   },
   text: {
-    fontSize: 24,
+    fontSize: 20,
     // color: "white",
     fontFamily:"SourceSansPro-Italic",
     fontWeight: "bold",
   },
   text2: {
-    fontSize: 18,
+    fontSize: 16,
     color: "#5c5f66",
     fontFamily:"SourceSansPro-Regular",
     justifyContent:"center",
     textAlign:"center",
-   marginTop:"5%"
+   marginTop:"5%",paddingLeft:"5%",paddingRight:"5%"
+   
   },
  btn: {
     backgroundColor: "#4054F3", 
