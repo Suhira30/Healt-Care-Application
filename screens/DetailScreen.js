@@ -1,8 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
+import { Avatar, Button, Card } from 'react-native-paper';
+
+// const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 const DetailScreen = ({ route }) => {
+  
   const { name } = route.params; // Extract country name from route params
   const [countryData, setCountryData] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
@@ -57,15 +61,66 @@ const DetailScreen = ({ route }) => {
   }
 
   return (
+    
     <View style={styles.container}>
-      <Text style={styles.header}>COVID-19 Details for {name}</Text>
-      <Text>Population: {countryData?.population}</Text>
-      <Text>New Cases: {countryData?.cases?.new}</Text>
-      <Text>Total Cases: {countryData?.cases?.total}</Text>
-      <Text>Active Cases: {countryData?.cases?.active}</Text>
-      <Text>Recovered: {countryData?.cases?.recovered}</Text>
-      <Text>Total Deaths: {countryData?.deaths?.total}</Text>
-      
+    <Text style={styles.header}>Statistic of {name}</Text>
+    <Card style={[styles.card1,{backgroundColor:"#161853"}]}>
+    <Card.Content>
+      <View style={styles.row}>
+        <Text variant="titleLarge" style={[styles.leftText,{color:"white"}]}>
+          Population of {name}
+        </Text>
+        <Text variant="titleLarge" style={[styles.rightText,{color:"white"}]}>
+          {countryData?.population}
+        </Text>
+      </View>
+    </Card.Content>
+  </Card>
+  <View style={styles.row}>
+      {/* Card 1 */}
+      <Card style={[styles.smallCard,{backgroundColor:"#D71313"}]} >
+        <Card.Content>
+          <Text style={{color:"white"}}>Total Death</Text>
+          <Text style={[styles.boldText,{color:"white"}]}>{countryData?.deaths?.total  || 'N/A'}</Text>
+        </Card.Content>
+      </Card>
+
+      {/* Card 2 */}
+      <Card style={[styles.smallCard,{backgroundColor:"#FAB12F"}]} >
+        <Card.Content>
+          <Text style={{color:"white"}}>Total Cases</Text>
+          <Text style={[styles.boldText,{color:"white"}]}>{countryData?.cases?.total || 'N/A'}</Text>
+        </Card.Content>
+      </Card>
+    </View>
+
+    {/* Three Cards Side by Side */}
+    <View style={styles.row}>
+      {/* Card 1 */}
+      <Card style={[styles.smallCard,{backgroundColor:"#77CDFF"}]} >
+        <Card.Content>
+          <Text style={{color:"white"}}>Active Cases</Text>
+          <Text style={[styles.boldText,{color:"white"}]}>{countryData?.cases?.active || 'N/A'}</Text>
+        </Card.Content>
+      </Card>
+
+      {/* Card 2 */}
+      <Card style={[styles.smallCard,{backgroundColor:"#9ADE7B"}]} >
+        <Card.Content>
+          <Text style={{color:"white"}}>Recovered</Text>
+          <Text style={[styles.boldText,{color:"white"}]}>{countryData?.cases?.recovered || 'N/A'}</Text>
+        </Card.Content>
+      </Card>
+
+      {/* Card 3 */}
+      <Card style={[styles.smallCard,{backgroundColor:"#7149C6"}]} >
+        <Card.Content>
+          <Text style={{color:"white"}}>New Cases</Text>
+          <Text style={[styles.boldText,{color:"white"}]}>{countryData?.cases?.new|| 'N/A'}</Text>
+        </Card.Content>
+      </Card>
+    </View>
+
     </View>
   );
 };
@@ -73,14 +128,56 @@ const DetailScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     padding: 16,
   },
   header: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
-    textAlign: 'center',
+  },
+  card1:{
+    width:340,
+    marginLeft:10,
+    height:80
+  },
+   row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between', // Space between cards
+    alignItems: 'center',
+    marginTop: 16, // Add space between rows
+  },
+  card: {
+    marginBottom: 16,
+  },
+  smallCard: {
+    flex: 1, // Each card takes up equal space
+    marginHorizontal: 8, // Add spacing between the cards
+    height:86,
+
+  },
+  leftText: {
+    fontSize: 16,
+    color: '#000',
+    flex: 1,
+    flexWrap: 'wrap',
+  },
+  rightText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
+    maxWidth: '50%',
+    textAlign: 'right',
+    flexShrink: 1,
+  },
+  boldText: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  smallCard2: {
+    flex: 1, // Each card takes up equal space
+    marginHorizontal: 8, // Add spacing between the cards
+    height:86,
+    width:100
   },
 });
 

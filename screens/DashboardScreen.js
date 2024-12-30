@@ -3,7 +3,7 @@ import {ImageBackground, View, Text, FlatList, TouchableOpacity, StyleSheet,Imag
 import { Avatar, Button, Card } from 'react-native-paper';
 
 const countries = [
-  { name: 'Sri-Lanka', iso: 'sl', imageUrl: require('../assets/Image/Countries/1.png') },
+  { name: 'Sri-Lanka', iso: 'sl', imageUrl: require('../assets/Image/Countries/11.png') },
   { name: 'India', iso: 'ind', imageUrl: require('../assets/Image/Countries/2.png') },
   { name: 'Canada', iso: 'can', imageUrl: require('../assets/Image/Countries/3.png') },
   { name: 'France', iso: 'fra', imageUrl: require('../assets/Image/Countries/4.png') },
@@ -25,16 +25,14 @@ const DashboardScreen = ({ navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
+    
     <View style={styles.container}>
     <Card style={[styles.card, { backgroundColor: "white" }]}>
         <Card.Title
           style={styles.content}
           left={() => (
             <View style={styles.imageContainer}>
-              <Image
-                source={require('../assets/Image/logo2.png')}
-                style={styles.imageStyle}
-              />
+              
               <Text style={styles.covid} numberOfLines={1}>{"COVID-19 Track"}</Text>
               </View>
           )}
@@ -80,7 +78,9 @@ const DashboardScreen = ({ navigation }) => {
                       style={styles.countryImageBackground}
                       imageStyle={styles.countryImageStyle}
                     >
+                      <View style={styles.countryTextContainer}>
                       <Text style={styles.countryText}>{country.name}</Text>
+                      </View>                    
                     </ImageBackground>
                   </TouchableOpacity>
                 ))}
@@ -208,11 +208,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: 'Black',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowColor: 'rgb(111, 93, 242)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
-    textAlign:"center"
+    textAlign:"center",
+    color:"white"
   },
+  countryTextContainer: {
+  backgroundColor: 'rgba(68, 54, 67, 0.47)',
+  paddingHorizontal: 8,
+  paddingVertical: 4,
+  borderRadius: 12,
+  alignSelf: 'center', 
+  
+},
 });
 
 export default DashboardScreen;
