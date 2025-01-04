@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
 import { Avatar, Button, Card } from 'react-native-paper';
-
+import GraphComponent from '../components/GraphComponent';
 // const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
-
+import { LineChart, BarChart } from 'react-native-chart-kit';
 const DetailScreen = ({ route }) => {
   
   const { name } = route.params; // Extract country name from route params
@@ -60,6 +60,22 @@ const DetailScreen = ({ route }) => {
     );
   }
 
+  const lineChartData = {
+    labels: ['Total', 'Deaths', 'Active', 'Recovered'],
+    datasets: [
+      {
+        data: [
+          countryData?.cases?.total || 0,
+          countryData?.deaths?.total || 0,
+          countryData?.cases?.active || 0,
+          countryData?.cases?.recovered || 0,
+        ],
+        color: (opacity = 1) => `rgba(0, 0, 255, ${opacity})`, 
+        strokeWidth: 2,
+        
+      },
+    ],
+  };
   return (
     
     <View style={styles.container}>
@@ -120,7 +136,30 @@ const DetailScreen = ({ route }) => {
         </Card.Content>
       </Card>
     </View>
+<View>
 
+      {/* Line Chart */}
+      <View style={styles.chartContainer}>
+        <LineChart
+          data={lineChartData}
+          width={340} 
+          height={260} 
+          verticalLabelRotation={0}
+          chartConfig={{
+            backgroundColor: 'white',
+            backgroundGradientFrom: '#ffffff',
+            backgroundGradientTo: 'white',
+            decimalPlaces: 0,
+            color: (opacity = 1) => `rgba(0, 0, 255, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            style: { borderRadius: 16 },
+            propsForLabels: { dx: 6,  
+          },
+          }}
+          style={styles.chart}
+        />
+      </View>
+</View>
     </View>
   );
 };
@@ -128,12 +167,13 @@ const DetailScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 16,backgroundColor: 'white', 
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
+    marginLeft:12
   },
   card1:{
     width:340,
@@ -142,16 +182,16 @@ const styles = StyleSheet.create({
   },
    row: {
     flexDirection: 'row',
-    justifyContent: 'space-between', // Space between cards
+    justifyContent: 'space-between', 
     alignItems: 'center',
-    marginTop: 16, // Add space between rows
+    marginTop: 16, 
   },
   card: {
     marginBottom: 16,
   },
   smallCard: {
-    flex: 1, // Each card takes up equal space
-    marginHorizontal: 8, // Add spacing between the cards
+    flex: 1, 
+    marginHorizontal: 8,
     height:86,
 
   },
@@ -174,11 +214,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   smallCard2: {
-    flex: 1, // Each card takes up equal space
-    marginHorizontal: 8, // Add spacing between the cards
+    flex: 1, 
+    marginHorizontal: 8, 
     height:86,
     width:100
   },
+  chartContainer:{
+    marginTop: 30,
+    marginLeft:10,
+    padding :0,
+  }
 });
 
 export default DetailScreen;

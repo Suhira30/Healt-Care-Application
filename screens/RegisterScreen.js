@@ -91,7 +91,7 @@ export default function RegisterScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 60,
+    padding: 50,
     backgroundColor: '#f7f8fa', 
 },
   background: {
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   logo: {
-   
+   marginTop:"20%",
     alignSelf: "center",
     height: 100,
     width: 130,
