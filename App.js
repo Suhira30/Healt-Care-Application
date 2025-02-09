@@ -9,7 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DetailScreen from './screens/DetailScreen';
 import { AppProvider } from './Services/AppContext';
 
-Stack=createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 //Stack is a memory 
 
 export default function App() {
@@ -18,16 +18,16 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Landing'>
       <Stack.Screen name="Landing" component={LandingPage} options={{
-    headerShown: false  // This will hide the header
+    headerShown: false  
   }}/>
       <Stack.Screen name="Register" component={RegisterScreen} options={{
-    headerShown: false  // This will hide the header
+    headerShown: false  
   }}/>
       <Stack.Screen name="Login" component={LoginScreen} options={{
-    headerShown: false  // This will hide the header
+    headerShown: false  
   }}/>
       <Stack.Screen name="Dashboard" component={DashboardScreen} options={{
-    headerShown: false  // This will hide the header
+    headerShown: false 
   }}/>
       <Stack.Screen name="Detail" component={DetailScreen} />
       </Stack.Navigator>

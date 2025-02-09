@@ -1,37 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Alert } from 'react-native';
 import { useAppContext } from '../Services/AppContext';
 
 const DailyPrompt = () => {
   const { updatePoints } = useAppContext();
-  const [isPromptVisible, setIsPromptVisible] = useState(true);
 
-  if (!isPromptVisible) return null;
+  useEffect(() => {
+    console.log('DailyPrompt is mounted'); // Check if the component is mounting
 
-  Alert.alert(
-    'Self-Test Reminder',
-    'Have you taken your self-test today?',
-    [
-      {
-        text: 'Yes',
-        onPress: () => {
-          updatePoints(5);
-          setIsPromptVisible(false);
-          Alert.alert('Thank you!', '5 point added.');
-        },
-      },
-      {
-        text: 'No',
-        onPress: () => {
-          updatePoints(-5);
-          setIsPromptVisible(false);
-          Alert.alert('Stay motivated!', '5 points deducted.');
-        },
-      },
-    ]
-  );
+    const showSelfTestPrompt = () => {
+      console.log('Showing Alert'); // Log before alert to check timing
+      Alert.alert(
+        'Self-Test Reminder',
+        'Have you taken your self-test today?',
+        [
+          {
+            text: 'Yes',
+            onPress: () => {
+              console.log('User pressed Yes');
+              updatePoints(5);
+              Alert.alert('Thank you!', '5 points added.');
+            },
+          },
+          {
+            text: 'No',
+            onPress: () => {
+              console.log('User pressed No');
+              updatePoints(-5);
+              Alert.alert('Stay motivated!', '5 points deducted.');
+            },
+          },
+        ]
+      );
+    };
 
-  return null;
+    // Call the alert prompt after mounting
+    showSelfTestPrompt();
+  }, [updatePoints]); // Trigger the effect only when `updatePoints` changes
+
+  return null; // No UI is rendered by this component
 };
 
 export default DailyPrompt;
